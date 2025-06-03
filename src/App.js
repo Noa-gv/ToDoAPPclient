@@ -102,7 +102,7 @@ function App() {
               {Array.isArray(todos) &&
                 todos.map((todo) => (
                   <li
-                    className={todo.isComplite ? "completed" : ""}
+                    className={todo.isComplite ? "completed" : todo.nameItem}
                     key={todo.idItems}
                   >
                     <div className="view">
