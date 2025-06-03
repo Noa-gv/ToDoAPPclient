@@ -3,7 +3,7 @@ import axios from './axiosConfig';
 const service = {
   async getTasks() {
     try {
-      const response = await axios.get('/items');
+      const response = await axios.get('https://todoappserver-m5hw.onrender.com/items');
       return response.data;
     } catch (error) {
       console.error('Error fetching tasks:', error);
@@ -13,7 +13,7 @@ const service = {
 
   async addTask(newTask) {
     try {
-      const response = await axios.post('/items', { name: newTask, isComplete: false });
+      const response = await axios.post('https://todoappserver-m5hw.onrender.com/items', { name: newTask, isComplete: false });
       return response.data;
     } catch (error) {
       console.error("Error adding task:", error);
@@ -22,7 +22,7 @@ const service = {
 
   async setCompleted(id, isComplete) {
     try {
-      const response = await axios.put(`/items/${id}`, { isComplete });
+      const response = await axios.put(`https://todoappserver-m5hw.onrender.com/items/${id}`, { isComplete });
       return response.data;
     } catch (error) {
       console.error("Error updating task completion:", error);
@@ -31,7 +31,7 @@ const service = {
 
   async deleteTask(id) {
     try {
-      await axios.delete(`/items/${id}`);
+      await axios.delete(`https://todoappserver-m5hw.onrender.com/items/${id}`);
     } catch (error) {
       console.error("Error deleting task:", error);
     }
@@ -39,7 +39,7 @@ const service = {
 
   async getUsers() {
     try {
-      const response = await axios.get('/users');
+      const response = await axios.get('https://todoappserver-m5hw.onrender.com/users');
       return response.data;
     } catch (error) {
       console.error("Error fetching users:", error);
@@ -50,7 +50,7 @@ const service = {
   // פונקציה להוספת משתמש
   async addUser(username, password) {
     try {
-      const response = await axios.post('/users', { username, password });
+      const response = await axios.post('https://todoappserver-m5hw.onrender.com/users', { username, password });
       return response.data;
     } catch (error) {
       console.error("Error adding user:", error);
@@ -60,7 +60,7 @@ const service = {
   // פונקציה לעדכון פרטי משתמש
   async updateUser(id, userDetails) {
     try {
-      const response = await axios.put(`/users/${id}`, userDetails);
+      const response = await axios.put(`https://todoappserver-m5hw.onrender.com/users/${id}`, userDetails);
       return response.data;
     } catch (error) {
       console.error("Error updating user:", error);
@@ -70,7 +70,7 @@ const service = {
   // פונקציה למחיקת משתמש
   async deleteUser(id) {
     try {
-      await axios.delete(`/users/${id}`);
+      await axios.delete(`https://todoappserver-m5hw.onrender.com/users/${id}`);
     } catch (error) {
       console.error("Error deleting user:", error);
     }
@@ -78,7 +78,7 @@ const service = {
   
   async signup(username, password) {
     try {
-      const response = await axios.post('/signup', { username, password });
+      const response = await axios.post('https://todoappserver-m5hw.onrender.com/signup', { username, password });
       return response.data;
     } catch (error) {
       console.error("Error during signup:", error);
@@ -89,7 +89,7 @@ const service = {
   async login(username, password) {
     try {
       // בצע בקשת התחברות לשרת
-      const response = await axios.post('/login', { username, password });
+      const response = await axios.post('https://todoappserver-m5hw.onrender.com/login', { username, password });
       // נניח שהשרת מחזיר טוקן, אחסון בטוקן ב-localStorage
       localStorage.setItem('authToken', response.data.token);
     } catch (error) {

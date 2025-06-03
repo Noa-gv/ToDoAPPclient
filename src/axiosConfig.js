@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:5070';
+axios.defaults.baseURL = 'https://todoappserver-m5hw.onrender.com';
 
 // הוספת interceptor לתפיסת שגיאות ב-response
 axios.interceptors.response.use(
