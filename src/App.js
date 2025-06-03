@@ -102,14 +102,14 @@ function App() {
               {Array.isArray(todos) &&
                 todos.map((todo) => (
                   <li
-                    className={todo.isComplete ? "completed" : ""}
+                    className={todo.isComplite ? "completed" : ""}
                     key={todo.idItems}
                   >
                     <div className="view">
                       <input
                         className="toggle"
                         type="checkbox"
-                        defaultChecked={todo.isComplete}
+                        defaultChecked={todo.isComplite}
                         onChange={(e) =>
                           updateCompleted(todo, e.target.checked)
                         }

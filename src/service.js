@@ -13,16 +13,16 @@ const service = {
 
   async addTask(newTask) {
     try {
-      const response = await axios.post('https://todoappserver-m5hw.onrender.com/items', { name: newTask, isComplete: false });
+      const response = await axios.post('https://todoappserver-m5hw.onrender.com/items', { name: newTask, isComplite: false });
       return response.data;
     } catch (error) {
       console.error("Error adding task:", error);
     }
   },
 
-  async setCompleted(idItems, isComplete) {
+  async setCompleted(idItems, isComplite) {
     try {
-      const response = await axios.put(`https://todoappserver-m5hw.onrender.com/items/${idItems}`, { isComplete });
+      const response = await axios.put(`https://todoappserver-m5hw.onrender.com/items/${idItems}`, { isComplite });
       return response.data;
     } catch (error) {
       console.error("Error updating task completion:", error);
