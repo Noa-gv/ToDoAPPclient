@@ -130,7 +130,7 @@ function App() {
           ) : (
             <ul>
               {users.map((user) => (
-                <li key={user.idusers}>{user.username}</li>
+                <li key={user.idusers}>{user.nameUser}</li>
               ))}
             </ul>
           )}
