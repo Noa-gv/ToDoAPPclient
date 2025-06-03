@@ -3,7 +3,7 @@ import axios from './axiosConfig';
 const service = {
   async getTasks() {
     try {
-      const response = await axios.get('https://todoappserver-m5hw.onrender.com/Item');
+      const response = await axios.get('https://todoappserver-m5hw.onrender.com/item');
       return response.data;
     } catch (error) {
       console.error('Error fetching tasks:', error);
@@ -13,7 +13,7 @@ const service = {
 
   async addTask(newTask) {
     try {
-      const response = await axios.post('https://todoappserver-m5hw.onrender.com/Item', { name: newTask, isComplete: false });
+      const response = await axios.post('https://todoappserver-m5hw.onrender.com/item', { name: newTask, isComplete: false });
       return response.data;
     } catch (error) {
       console.error("Error adding task:", error);
@@ -22,7 +22,7 @@ const service = {
 
   async setCompleted(idItems, isComplete) {
     try {
-      const response = await axios.put(`https://todoappserver-m5hw.onrender.com/Item/${idItems}`, { isComplete });
+      const response = await axios.put(`https://todoappserver-m5hw.onrender.com/item/${idItems}`, { isComplete });
       return response.data;
     } catch (error) {
       console.error("Error updating task completion:", error);
@@ -31,7 +31,7 @@ const service = {
 
   async deleteTask(idItems) {
     try {
-      await axios.delete(`https://todoappserver-m5hw.onrender.com/Item/${idItems}`);
+      await axios.delete(`https://todoappserver-m5hw.onrender.com/item/${idItems}`);
     } catch (error) {
       console.error("Error deleting task:", error);
     }
