@@ -3,7 +3,7 @@ import axios from './axiosConfig';
 const service = {
   async getTasks() {
     try {
-      const response = await axios.get('https://todoappserver-m5hw.onrender.com/item');
+      const response = await axios.get('https://todoappserver-m5hw.onrender.com/items');
       return response.data;
     } catch (error) {
       console.error('Error fetching tasks:', error);
@@ -13,7 +13,7 @@ const service = {
 
   async addTask(newTask) {
     try {
-      const response = await axios.post('https://todoappserver-m5hw.onrender.com/item', { name: newTask, isComplete: false });
+      const response = await axios.post('https://todoappserver-m5hw.onrender.com/items', { name: newTask, isComplete: false });
       return response.data;
     } catch (error) {
       console.error("Error adding task:", error);
@@ -22,7 +22,7 @@ const service = {
 
   async setCompleted(idItems, isComplete) {
     try {
-      const response = await axios.put(`https://todoappserver-m5hw.onrender.com/item/${idItems}`, { isComplete });
+      const response = await axios.put(`https://todoappserver-m5hw.onrender.com/items/${idItems}`, { isComplete });
       return response.data;
     } catch (error) {
       console.error("Error updating task completion:", error);
@@ -31,7 +31,7 @@ const service = {
 
   async deleteTask(idItems) {
     try {
-      await axios.delete(`https://todoappserver-m5hw.onrender.com/item/${idItems}`);
+      await axios.delete(`https://todoappserver-m5hw.onrender.com/items/${idItems}`);
     } catch (error) {
       console.error("Error deleting task:", error);
     }
@@ -76,26 +76,26 @@ const service = {
     }
   },
   
-  async signup(nameUser, passwordHash) {
-    try {
-      const response = await axios.post('https://todoappserver-m5hw.onrender.com/signup', { nameUser, passwordHash });
-      return response.data;
-    } catch (error) {
-      console.error("Error during signup:", error);
-      throw error;
-    }
-  },
+  // async signup(nameUser, passwordHash) {
+  //   try {
+  //     const response = await axios.post('https://todoappserver-m5hw.onrender.com/signup', { nameUser, passwordHash });
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error("Error during signup:", error);
+  //     throw error;
+  //   }
+  // },
 
-  async login(nameUser, passwordHash) {
-    try {
-      // בצע בקשת התחברות לשרת
-      const response = await axios.post('https://todoappserver-m5hw.onrender.com/login', { nameUser, passwordHash });
-      // נניח שהשרת מחזיר טוקן, אחסון בטוקן ב-localStorage
-      localStorage.setItem('authToken', response.data.token);
-    } catch (error) {
-      throw new Error('Login failed');
-    }
-  }
+  // async login(nameUser, passwordHash) {
+  //   try {
+  //     // בצע בקשת התחברות לשרת
+  //     const response = await axios.post('https://todoappserver-m5hw.onrender.com/login', { nameUser, passwordHash });
+  //     // נניח שהשרת מחזיר טוקן, אחסון בטוקן ב-localStorage
+  //     localStorage.setItem('authToken', response.data.token);
+  //   } catch (error) {
+  //     throw new Error('Login failed');
+  //   }
+  // }
 };
 
 export default service;
