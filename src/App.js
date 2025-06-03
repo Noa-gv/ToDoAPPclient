@@ -114,7 +114,7 @@ function App() {
                           updateCompleted(todo, e.target.checked)
                         }
                       />
-                      <label>{todo.name}</label>
+                      <label>{todo.nameItem}</label>
                       <button
                         className="destroy"
                         onClick={() => deleteTodo(todo.idItems)}
