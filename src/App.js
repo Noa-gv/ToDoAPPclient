@@ -128,7 +128,11 @@ function App() {
       </section>
 
       {/* רשימת משתמשים */}
-     <Users users={users} loading={loadingUsers} />
+      <Users users={users} loading={loadingUsers} />
+      {/* כפתור ריענון לעמוד */}
+      <button onClick={getTodos} disabled={loadingTasks}>
+        {loadingTasks ? "Loading tasks...": "Loading for new things"}
+      </button>
     </div>
   );
 }
