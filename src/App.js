@@ -57,9 +57,9 @@ function App() {
   }
 
   // פונקציה למחיקת משימה
-  async function deleteTodo(id) {
+  async function deleteTodo(idItems) {
     try {
-      await service.deleteTask(id);
+      await service.deleteTask(idItems);
       await getTodos();
     } catch (error) {
       console.error("Error deleting todo:", error);
@@ -95,7 +95,7 @@ function App() {
               {todos.map((todo) => (
                 <li
                   className={todo.isComplete ? "completed" : ""}
-                  key={todo.id}
+                  key={todo.idItems}
                 >
                   <div className="view">
                     <input
@@ -109,7 +109,7 @@ function App() {
                     <label>{todo.name}</label>
                     <button
                       className="destroy"
-                      onClick={() => deleteTodo(todo.id)}
+                      onClick={() => deleteTodo(todo.idItems)}
                     ></button>
                   </div>
                 </li>
@@ -130,7 +130,7 @@ function App() {
           ) : (
             <ul>
               {users.map((user) => (
-                <li key={user.id}>{user.username}</li>
+                <li key={user.idusers}>{user.username}</li>
               ))}
             </ul>
           )}

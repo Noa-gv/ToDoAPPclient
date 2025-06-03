@@ -20,18 +20,18 @@ const service = {
     }
   },
 
-  async setCompleted(id, isComplete) {
+  async setCompleted(idItems, isComplete) {
     try {
-      const response = await axios.put(`https://todoappserver-m5hw.onrender.com/Item/${id}`, { isComplete });
+      const response = await axios.put(`https://todoappserver-m5hw.onrender.com/Item/${idItems}`, { isComplete });
       return response.data;
     } catch (error) {
       console.error("Error updating task completion:", error);
     }
   },
 
-  async deleteTask(id) {
+  async deleteTask(idItems) {
     try {
-      await axios.delete(`https://todoappserver-m5hw.onrender.com/Item/${id}`);
+      await axios.delete(`https://todoappserver-m5hw.onrender.com/Item/${idItems}`);
     } catch (error) {
       console.error("Error deleting task:", error);
     }
@@ -58,9 +58,9 @@ const service = {
   },
 
   // פונקציה לעדכון פרטי משתמש
-  async updateUser(id, userDetails) {
+  async updateUser(idusers, userDetails) {
     try {
-      const response = await axios.put(`https://todoappserver-m5hw.onrender.com/users/${id}`, userDetails);
+      const response = await axios.put(`https://todoappserver-m5hw.onrender.com/users/${idusers}`, userDetails);
       return response.data;
     } catch (error) {
       console.error("Error updating user:", error);
@@ -68,9 +68,9 @@ const service = {
   },
 
   // פונקציה למחיקת משתמש
-  async deleteUser(id) {
+  async deleteUser(idusers) {
     try {
-      await axios.delete(`https://todoappserver-m5hw.onrender.com/users/${id}`);
+      await axios.delete(`https://todoappserver-m5hw.onrender.com/users/${idusers}`);
     } catch (error) {
       console.error("Error deleting user:", error);
     }
