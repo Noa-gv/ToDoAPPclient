@@ -48,9 +48,9 @@ const service = {
   },
 
   // פונקציה להוספת משתמש
-  async addUser(username, password) {
+  async addUser(nameUser, passwordHash) {
     try {
-      const response = await axios.post('https://todoappserver-m5hw.onrender.com/users', { username, password });
+      const response = await axios.post('https://todoappserver-m5hw.onrender.com/users', { nameUser, passwordHash });
       return response.data;
     } catch (error) {
       console.error("Error adding user:", error);
@@ -76,9 +76,9 @@ const service = {
     }
   },
   
-  async signup(username, password) {
+  async signup(nameUser, passwordHash) {
     try {
-      const response = await axios.post('https://todoappserver-m5hw.onrender.com/signup', { username, password });
+      const response = await axios.post('https://todoappserver-m5hw.onrender.com/signup', { nameUser, passwordHash });
       return response.data;
     } catch (error) {
       console.error("Error during signup:", error);
@@ -86,10 +86,10 @@ const service = {
     }
   },
 
-  async login(username, password) {
+  async login(nameUser, passwordHash) {
     try {
       // בצע בקשת התחברות לשרת
-      const response = await axios.post('https://todoappserver-m5hw.onrender.com/login', { username, password });
+      const response = await axios.post('https://todoappserver-m5hw.onrender.com/login', { nameUser, passwordHash });
       // נניח שהשרת מחזיר טוקן, אחסון בטוקן ב-localStorage
       localStorage.setItem('authToken', response.data.token);
     } catch (error) {
