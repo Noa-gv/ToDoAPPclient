@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import service from "./service";
+import Users from "./useralist";
 
 function App() {
   const [newTodo, setNewTodo] = useState("");
@@ -8,12 +9,17 @@ function App() {
   const [loadingTasks, setLoadingTasks] = useState(false);
   const [loadingUsers, setLoadingUsers] = useState(false);
 
-  // פונקציה להורדת משימות
   async function getTodos() {
     setLoadingTasks(true);
     try {
       const todos = await service.getTasks();
-      setTodos(todos);
+      console.log("todos from server:", todos); // בדיקה
+      if (Array.isArray(todos)) {
+        setTodos(todos);
+      } else {
+        console.warn("Expected array but got:", typeof todos);
+        setTodos([]);
+      }
     } catch (error) {
       console.error("Error fetching todos:", error);
     } finally {
@@ -21,12 +27,17 @@ function App() {
     }
   }
 
-  // פונקציה להורדת משתמשים
   async function getUsers() {
     setLoadingUsers(true);
     try {
       const users = await service.getUsers();
-      setUsers(users);
+      console.log("users from server:", users); // בדיקה
+      if (Array.isArray(users)) {
+        setUsers(users);
+      } else {
+        console.warn("Expected array but got:", typeof users);
+        setUsers([]);
+      }
     } catch (error) {
       console.error("Error fetching users:", error);
     } finally {
@@ -34,7 +45,6 @@ function App() {
     }
   }
 
-  // פונקציה להוספת משימה חדשה
   async function createTodo(e) {
     e.preventDefault();
     try {
@@ -46,17 +56,15 @@ function App() {
     }
   }
 
-  // פונקציה לעדכון סטטוס המשימה
   async function updateCompleted(todo, isComplete) {
     try {
-      await service.setCompleted(todo.id, isComplete);
+      await service.setCompleted(todo.idItems, isComplete);
       await getTodos();
     } catch (error) {
       console.error("Error updating todo:", error);
     }
   }
 
-  // פונקציה למחיקת משימה
   async function deleteTodo(idItems) {
     try {
       await service.deleteTask(idItems);
@@ -66,7 +74,6 @@ function App() {
     }
   }
 
-  // טעינת משימות ומשתמשים בעת טעינת הקומפוננטה
   useEffect(() => {
     getTodos();
     getUsers();
@@ -92,50 +99,36 @@ function App() {
             <p>Loading tasks...</p>
           ) : (
             <ul className="todo-list">
-              {todos.map((todo) => (
-                <li
-                  className={todo.isComplete ? "completed" : ""}
-                  key={todo.idItems}
-                >
-                  <div className="view">
-                    <input
-                      className="toggle"
-                      type="checkbox"
-                      defaultChecked={todo.isComplete}
-                      onChange={(e) =>
-                        updateCompleted(todo, e.target.checked)
-                      }
-                    />
-                    <label>{todo.name}</label>
-                    <button
-                      className="destroy"
-                      onClick={() => deleteTodo(todo.idItems)}
-                    ></button>
-                  </div>
-                </li>
-              ))}
+              {Array.isArray(todos) &&
+                todos.map((todo) => (
+                  <li
+                    className={todo.isComplete ? "completed" : ""}
+                    key={todo.idItems}
+                  >
+                    <div className="view">
+                      <input
+                        className="toggle"
+                        type="checkbox"
+                        defaultChecked={todo.isComplete}
+                        onChange={(e) =>
+                          updateCompleted(todo, e.target.checked)
+                        }
+                      />
+                      <label>{todo.name}</label>
+                      <button
+                        className="destroy"
+                        onClick={() => deleteTodo(todo.idItems)}
+                      ></button>
+                    </div>
+                  </li>
+                ))}
             </ul>
           )}
         </section>
       </section>
 
       {/* רשימת משתמשים */}
-      <section className="user-list">
-        <header className="header">
-          <h2>Users</h2>
-        </header>
-        <section className="main" style={{ display: "block" }}>
-          {loadingUsers ? (
-            <p>Loading users...</p>
-          ) : (
-            <ul>
-              {users.map((user) => (
-                <li key={user.idusers}>{user.nameUser}</li>
-              ))}
-            </ul>
-          )}
-        </section>
-      </section>
+     <Users users={users} loading={loadingUsers} />
     </div>
   );
 }

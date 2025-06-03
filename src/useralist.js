@@ -1,19 +1,24 @@
 import React from 'react';
 
-function Users({ users }) {
+function Users({ users, loading }) {
   return (
     <section className="user-list">
       <header className="header">
-        <h1>Users</h1>
+        <h2>Users</h2>
       </header>
       <section className="main" style={{ display: "block" }}>
-        <ul>
-          {users.map(user => (
-            <li key={user.idusers}>
-              <span>{user.nameUser}</span>
-            </li>
-          ))}
-        </ul>
+        {loading ? (
+          <p>Loading users...</p>
+        ) : (
+          <ul>
+            {Array.isArray(users) &&
+              users.map(user => (
+                <li key={user.idusers}>
+                  <span>{user.nameUser}</span>
+                </li>
+              ))}
+          </ul>
+        )}
       </section>
     </section>
   );
