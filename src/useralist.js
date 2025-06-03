@@ -9,8 +9,8 @@ function Users({ users }) {
       <section className="main" style={{ display: "block" }}>
         <ul>
           {users.map(user => (
-            <li key={user.id}>
-              <span>{user.username}</span>
+            <li key={user.idusers}>
+              <span>{user.nameUser}</span>
             </li>
           ))}
         </ul>
